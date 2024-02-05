@@ -2,23 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr:false,
-  build:{
-    transpile:["@jsquash/avif","@jsquash/resize"]
-  },
-  
   modules: [
     'vuetify-nuxt-module',
-    
   ],
-  plugins:[{
-    src:"~/plugins/vue-konva",
-    ssr:false,
-  }],
-  vite:{
-    optimizeDeps:{
-      exclude:["@jsquash/avif","@jsquash/resize"]
-    },
-  },
 
   vuetify: {
     vuetifyOptions: {
