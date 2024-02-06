@@ -3,36 +3,58 @@
     <v-main>
         <slot />
     </v-main>
-    <v-bottom-navigation
-      v-model="value"
-      :bg-color="color"
-      mode="shift"
+    <v-app-bar collapse elevation="0">
+      <template v-slot:prepend>
+        <v-app-bar-nav-icon @click="drawer = !drawer" />
+      </template>
+  </v-app-bar>
+    <v-navigation-drawer
+        v-model="drawer"
     >
-    <v-btn @click="navigateTo('/')">
-        <v-icon>mdi-television-play</v-icon>
+      <v-list>
+        <v-list-item
+          v-if="auth.isLogin"
+          :prepend-avatar="auth.avater"
+          :title="auth.name"
+          :subtitle="auth.mail"
+        ></v-list-item>
+        <v-list-item
+          v-if="!auth.isLogin"
+          prepend-icon="mdi-account-off"
+        ></v-list-item>
+      </v-list>
 
-        <span>Video</span>
-      </v-btn>
+      <v-divider></v-divider>
 
-      <v-btn @click="navigateTo('/login')">
-        <v-icon>mdi-music-note</v-icon>
-
-        <span>Music</span>
-      </v-btn>
-
-    </v-bottom-navigation>
+      <v-list density="compact" nav>
+        <v-list-item v-if="auth.isLogin" prepend-icon="mdi-logout" title="Logout" @click="signOutUser"></v-list-item>
+        <v-list-item v-if="!auth.isLogin" prepend-icon="mdi-login" title="Login" @click="signIn" ></v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 </v-layout>
 </template>
 
 <script setup>
-    const value = ref(1)
-    const color = computed(()=>{
-        switch (value.value){
-          case 0: return 'indigo'
-          case 1: return 'teal'
-          case 2: return 'brown'
-          case 3: return 'indigo'
-          default: return 'blue-grey'
-        }
-    })
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+} from 'firebase/auth';
+const drawer = ref(false)
+const auth = useAuth()
+console.log(auth.value)
+    
+const signIn=()=> {
+    var provider = new GoogleAuthProvider();
+    signInWithPopup(getAuth(), provider)
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        window.alert("faild to login", errorCode, errorMessage );
+    });
+}
+
+const signOutUser = async()=> await signOut(getAuth());
+
 </script>

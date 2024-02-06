@@ -8,15 +8,14 @@ import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { defineNuxtPlugin } from '#app';
 
 export default defineNuxtPlugin(() => {
-
     const firebaseConfig = {
-        apiKey: "AIzaSyBdMDux7lnMhM2PUGgh8ut9WbxNJc3RPKs",
-        authDomain: "easybuilding-57efe.firebaseapp.com",
-        projectId: "easybuilding-57efe",
-        storageBucket: "easybuilding-57efe.appspot.com",
-        messagingSenderId: "944156422914",
-        appId: "1:944156422914:web:6d74a773069c523f0d881b",
-        measurementId: "G-FRPM9N0CRS"
+        apiKey: ,
+        authDomain: ,
+        projectId: ,
+        storageBucket: ,
+        messagingSenderId: ,
+        appId: ,
+        measurementId: 
       };
    
     initializeApp(firebaseConfig);
