@@ -1,5 +1,12 @@
 # First setup
 plugins/firebase.client.ts -> firebaseConfig
+```
+npm i
+```
+```
+firebase init
+```
+
 
 # usage snapshot
 APP.vue ->  //usesnapshot() -> usesnapshot()
